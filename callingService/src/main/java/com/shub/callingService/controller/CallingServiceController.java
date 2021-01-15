@@ -1,6 +1,8 @@
 package com.shub.callingService.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,15 @@ public class CallingServiceController {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Value("${my.greeting}")
+	private String greeting;
+	
+	@GetMapping(path = "/propertiesValues")
+	public String displayPropertiesValues()
+	{
+		return greeting;
+	}
 
 	/*
 	 * public CallingBean getAllList() { CallingBean callingBean = new
@@ -24,7 +35,7 @@ public class CallingServiceController {
 	 * callingBean.setLanguageList(listBean); return callingBean; }
 	 */
 
-	@RequestMapping(path = "{languageId}")
+	@RequestMapping(path = "/{languageId}")
 	public CallingBean displayList(@PathVariable("languageId") String languageId) {
 		CallingBean callingBean = new CallingBean();
 		LanguageBean languageBean = restTemplate.getForObject("http://hello-world-service/displayList/" + languageId,
