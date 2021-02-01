@@ -23,7 +23,7 @@ import jakarta.ws.rs.core.UriInfo;
 
 @Path("/messages")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces(value = { MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
+@Produces(value = { MediaType.APPLICATION_JSON})
 public class MessageResource {
 
 	public MessageResource() {
